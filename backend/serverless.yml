@@ -1,0 +1,23 @@
+service:
+  name: students-create-dashboards-service
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: eu-west-1
+
+functions:
+  create-dashboards:
+    handler: src/GraphQL.graphqlHandler
+    events:
+      - http:
+          method: any
+          path: create-dashboards
+          cors: true
+          integration: lambda-proxy
+
